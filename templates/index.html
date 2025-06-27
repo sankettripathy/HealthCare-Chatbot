@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AlphaCure</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+  </head>
+  <body class="bg-light">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="chatbox card shadow-lg rounded-4 w-100" style="max-width: 500px;">
+        <div class="card-header bg-primary text-white rounded-top-4">
+          <h3 class="mb-0">🏥 Medical Chatbot</h3>
+        </div>
+        <div class="card-body chat-body overflow-auto" id="chat-body">
+          <div class="message bot-message mb-3">
+            Hi! How can I help you today?
+            <div class="timestamp text-muted small">Now</div>
+          </div>
+        </div>
+        <div class="card-footer p-2 bg-white rounded-bottom-4">
+          <form id="chat-form" class="d-flex">
+            <input type="text" class="form-control me-2" id="user-input" placeholder="Type your message..." required autocomplete="off">
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("user-input");
+      const chatBody = document.getElementById("chat-body");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        // Display user message
+        const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        const userMsg = `<div class="message user-message mb-3">${msg}<div class="timestamp text-muted small">${time}</div></div>`;
+        chatBody.innerHTML += userMsg;
+        chatBody.scrollTop = chatBody.scrollHeight;
+        input.value = "";
+
+        // Send to Flask
+        fetch("/get", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({message: msg})
+        })
+        .then(res => res.json())
+        .then(data => {
+          const botMsg = `<div class="message bot-message mb-3">${data.response}<div class="timestamp text-muted small">${time}</div></div>`;
+          chatBody.innerHTML += botMsg;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        });
+      });
+    </script>
+  </body>
+</html>

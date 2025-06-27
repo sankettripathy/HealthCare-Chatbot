@@ -1,0 +1,60 @@
+.chatbox {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-body {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #faf0e6;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+/* .bot-message {
+  background-color: #40da70;
+  align-self: flex-start;
+}
+
+.user-message {
+  background-color: #a8e5e8;
+  /* color: white; 
+  align-self: flex-end;
+} */
+
+.bot-message {
+  background-color: #40da70;
+  max-width: 60%;
+  margin-right: auto;    /* Pushes it to the left */
+  text-align: left;
+  border-top-left-radius: 0;
+}
+
+/* User message styling */
+.user-message {
+  background-color: #a8e5e8;
+  max-width: 60%;
+  margin-left: auto;     /* Pushes it to the right */
+  text-align: left;
+  border-top-right-radius: 0;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  margin-top: 5px;
+}
+
+ body {
+            background: rgb(96,143,149); /* Old browsers */
+            background: -moz-linear-gradient(-45deg, rgba(96,143,149,1) 0%, rgba(0,133,136,1) 9%, rgba(12,36,73,1) 52%, rgba(26,30,59,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, rgba(96,143,149,1) 0%,rgba(0,133,136,1) 9%,rgba(12,36,73,1) 52%,rgba(26,30,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, rgba(96,143,149,1) 0%,rgba(0,133,136,1) 9%,rgba(12,36,73,1) 52%,rgba(26,30,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#608f95', endColorstr='#1a1e3b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
